@@ -12,7 +12,7 @@ case "$1" in
         fi [ ! -f /etc/dropbear/dropbear_dss_host_key ]; then
             dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
         fi
-        dropbear -m
+        /sbin/dropbear -m
         ;;
     stop )
         killall dropbear

@@ -33,14 +33,15 @@ case "$1" in
             exit 2
         fi
         # install common files------
-        mkdir -p "$INIT_PATH"
+        mkdir -pv "$INIT_PATH"
         ( cd "$DIR"/src/scripts && cp -pRv inittab "$DIR"/build/etc/inittab )
         ( cd "$DIR"/src/scripts && cp -pRv rc.local "$INIT_PATH" )
         #---------------------------
         if [ "$build_sshd" == "yes" ]; then
 	        do_dropbear
+            mkdir -pv "$ADDS_PATH"
             rm -rfv "$DIR"/build/share
-            ( cd "$DIR"/src/scripts && cp -pRv dropbear.sh "$INIT_PATH"/dropbear.sh )
+            ( cd "$DIR"/src/scripts && cp -pRv dropbear.sh "$ADDS_PATH"/dropbear.sh )
             chmod +x "$DIR"/build/etc/init.d/dropbear.sh
         fi
 
@@ -51,7 +52,8 @@ case "$1" in
             ( cd "$DIR"/src/scripts && cp -pRv fmon.sh "$ADDS_PATH" )
             chmod +x "$INIT_PATH"/on-animator.sh
             if [ "$ota_survive" == "yes" ]; then
-                ( cd "$DIR"/src/scripts && cp -pRv ota-survive.sh on-animator-fmon.sh "$DIR"/build/etc/init.d )
+                ( cd "$DIR"/src/scripts && cp -pRv on-animator-fmon.sh "$INIT_PATH" )
+                ( cd "$DIR"/src/scripts && cp -pRv ota-survive.sh "$ADDS_PATH" )
             fi
             if [ "$add_png_koreader" == "yes" ]; then
                 ( cd "$DIR"/src/resources && cp -pRv koreader.png "$DIR"/build/mnt/onboard/koreader.png )
