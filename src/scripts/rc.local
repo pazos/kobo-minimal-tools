@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# start dropbear if present.
+if [ -f /etc/init.d/dropbear.sh ]; then
+    hostname kobo
+    ifconfig lo up
+    mkdir -p /dev/pts
+    mount -t devpts devpts /dev/pts
+    /etc/init.d/dropbear.sh start
+fi
+
+# fmon survives OTA upgrades from Kobo.
+if [ -f /etc/init.d/ota-survive.sh ]; then
+    /etc/init.d/ota-survive.sh
+fi
