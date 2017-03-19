@@ -1,5 +1,5 @@
 ::sysinit:/etc/init.d/rcS
-::sysinit:/etc/init.d/rc.local
+::sysinit:/etc/init.d/local.sh
 ::shutdown:/bin/umount -a -r
 ::restart:/sbin/init
 ::respawn:/sbin/getty -L ttymxc0 115200 vt100

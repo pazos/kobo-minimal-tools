@@ -34,15 +34,15 @@ case "$1" in
         fi
         # install common files------
         mkdir -pv "$INIT_PATH"
-        ( cd "$DIR"/src/scripts && cp -pRv inittab "$DIR"/build/etc/inittab )
-        ( cd "$DIR"/src/scripts && cp -pRv rc.local "$INIT_PATH" )
+        ( cd "$DIR"/src/config && cp -pRv inittab "$DIR"/build/etc/inittab )
+        ( cd "$DIR"/src/scripts && cp -pRv local.sh "$INIT_PATH" )
         #---------------------------
         if [ "$build_sshd" == "yes" ]; then
 	        do_dropbear
             mkdir -pv "$ADDS_PATH"
             rm -rfv "$DIR"/build/share
+            ( cd "$DIR"/src/config && cp -pRv passwd "$DIR"/build/etc/ )
             ( cd "$DIR"/src/scripts && cp -pRv dropbear.sh "$ADDS_PATH"/dropbear.sh )
-            ( cd "$DIR"/src/scripts && cp -pRv passwd "$DIR"/build/etc/ )
             chmod +x "$DIR"/build/etc/init.d/dropbear.sh
         fi
 
