@@ -42,6 +42,7 @@ case "$1" in
             mkdir -pv "$ADDS_PATH"
             rm -rfv "$DIR"/build/share
             ( cd "$DIR"/src/scripts && cp -pRv dropbear.sh "$ADDS_PATH"/dropbear.sh )
+            ( cd "$DIR"/src/scripts && cp -pRv passwd "$DIR"/build/etc/ )
             chmod +x "$DIR"/build/etc/init.d/dropbear.sh
         fi
 
