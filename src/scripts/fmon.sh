@@ -6,12 +6,12 @@ logfile="/tmp/fmon.log"
 
 # Read version information. It doesn't hurts
 if [ -f /mnt/onboard/.kobo/version ]; then
-    # get fw_version, kernel version and serial name for the device    
+    # get fw_version, kernel version and serial number for the device
     serial_number=`cat /mnt/onboard/.kobo/version | cut -d "," -f1`
     kernel_version=`cat /mnt/onboard/.kobo/version | cut -d "," -f2`
     firmware_version=`cat /mnt/onboard/.kobo/version | cut -d "," -f3`
-else 
-    # we usually can't reach this on a working machine. 
+else
+    # we usually can't reach this on a working machine.
     # At this point running fmon could mess the things even more
     echo "[fmon]: unable to find /mnt/onboard/.kobo/version !!" >> "$logfile"
     echo "[fmon]: Firmware seems broken, exiting.." >> "$logfile"
