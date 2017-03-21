@@ -1,4 +1,5 @@
 #!/bin/sh
+#---fmon-enabled
 PRODUCT=`/bin/kobo_config.sh 2>/dev/null`;
 [ $PRODUCT != trilogy ] && PREFIX=$PRODUCT-
 

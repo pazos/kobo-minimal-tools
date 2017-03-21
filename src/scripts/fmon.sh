@@ -1,8 +1,7 @@
 #!/bin/sh
 # fmon launcher script, called from /etc/init.d/on-animator.sh
-# we're called as a new proccess in background and redirected to /dev/null. We have plenty of time to check stuff and
-# need a file to write some logs.
-logfile="/tmp/fmon.log"
+# we're called as a new proccess in background and redirected to /dev/null, 
+# so we have plenty of time to check stuff and need a file to write logs.
 
 # Read version information. It doesn't hurts
 if [ -f /mnt/onboard/.kobo/version ]; then
@@ -18,9 +17,10 @@ else
     exit 3
 fi
 
+# Set a file to log to because stdout > /dev/null
+logfile="/tmp/fmon.log"
+
 echo "[fmon] starting on device $serial_number [FW: $firmware_version]" >> "$logfile"
-
-
 ### TRIGGERS ####
 # KOReader
 if [ -f /mnt/onboard/koreader.png ] && [ -f /mnt/onboard/.adds/koreader/koreader.sh ]; then
