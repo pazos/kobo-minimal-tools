@@ -50,7 +50,7 @@ case "$1" in
 	        do_fmon
             mkdir -pv "$ADDS_PATH"
             ( cd "$DIR"/src/scripts && cp -pRv on-animator-fmon.sh "$INIT_PATH"/on-animator.sh )
-            ( cd "$DIR"/src/scripts && cp -pRv fmon.sh "$ADDS_PATH" )
+            ( cd "$DIR"/src/scripts && cp -pRv fmon.sh koreader_alt.sh "$ADDS_PATH" )
             chmod +x "$INIT_PATH"/on-animator.sh
             if [ "$ota_survive" == "yes" ]; then
                 ( cd "$DIR"/src/scripts && cp -pRv on-animator-fmon.sh "$INIT_PATH" )
@@ -62,6 +62,7 @@ case "$1" in
             if [ "$add_png_launcher" == "yes" ]; then
                 ( cd "$DIR"/src/resources && cp -pRv launcher.png "$DIR"/build/mnt/onboard/launcher.png )
             fi
+            
         fi
 
         # strip built binaries------
