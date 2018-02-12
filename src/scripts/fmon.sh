@@ -11,8 +11,8 @@ LOGFILE="/tmp/fmon.log"
 
 echo "[fmon]: starting on FW: ${firmware_version}" >> "$LOGFILE"
 for icon in "${ICONS_DIR}"/*.png; do
-	app=$(basename "$icon" .png)
+    app=$(basename "$icon" .png)
     script="${SCRIPTS_DIR}/${app}/${app}.sh"
-    echo "[fmon]:registering new trigger: ${icon}, linked with ${script}" >> $LOGFILE"
-	/sbin/fmon "$icon" "$script" > "$LOGFILE" 2>&1 &
+    echo "[fmon]:registering new trigger: ${icon}, linked with ${script}" >> "$LOGFILE"
+    /sbin/fmon "$icon" "$script" > "$LOGFILE" 2>&1 &
 done
