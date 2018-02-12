@@ -1,32 +1,31 @@
 #!/bin/sh
-# /etc/init.d/local.sh, called from inittab.
-# keep this script simple.
+# /etc/init.d/local.sh: used to do post-boot stuff
 
-# Workflow:
-# check for a script in /mnt/onboard/.adds/
-# run commands if the script is found
-
-# Using a PATH under /mnt/onboard/ makes scripts and other software
-# avaliable with usb storage. 
-
-# Run dropbear if we can reach the script.
+# start dropbear ssh server:
 if [ -f /mnt/onboard/.adds/dropbear.sh ]; then
-
-    # Basic network configuration
-    hostname kobo   # looks better than (none)
+    hostname kobo
     ifconfig lo up
-
-    # Enable pseudoterminals (aka virtual terminals). 
-    # Needed for network logins (telnet,ssh..)
     mkdir -p /dev/pts
     mount -t devpts devpts /dev/pts
 
-    # Run dropbear script.
-    /etc/init.d/dropbear.sh start
+    if [ ! -d /etc/dropbear ]; then
+        mkdir -pv /etc/dropbear
+    fi
+
+    if [ ! -f /etc/dropbear/dropbear_rsa_host_key ]; then
+        dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
+    fi
+    
+    fi [ ! -f /etc/dropbear/dropbear_dss_host_key ]; then
+        dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
+    fi
+    /sbin/dropbear -m
 fi
 
-# Run ota-survive script and enable fmon after a FW Upgrade
-# if we can reach the script.
-if [ -f /mnt/onboard/.adds/ota-survive.sh ]; then
-    /mnt/onboard/.adds/ota-survive.sh
+# fmon needs this to survive OTA updates
+if [ -f /etc/init.d/on-animator-fmon.sh ]; then
+    if `grep -q flag /etc/init.d/on-animator.sh `; then
+        cp -pRv /etc/init.d/on-animator-fmon.sh /etc/init.d/on-animator.sh
+        chmod +x /etc/init.d/on-animator.sh
+    fi
 fi
