@@ -1,5 +1,0 @@
-build_sshd="yes"            # build dropbear as a part of KoboRoot.tgz
-build_fmon="yes"            # build fmon as a part of KoboRoot.tgz
-add_png_koreader="yes"      # add koreader.png image as part of KoboRoot.tgz
-add_png_launcher="yes"      # add vlasovsoft's launcher.png image as part of KoboRoot.tgz
-ota_survive="yes"           # fmon survives to kobo OTA upgrades (skipped if build_fmon is disabled)
