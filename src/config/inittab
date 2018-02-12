@@ -3,4 +3,3 @@
 ::shutdown:/bin/umount -a -r
 ::restart:/sbin/init
 ::respawn:/sbin/getty -L ttymxc0 115200 vt100
-::respawn:/usr/sbin/inetd -f /etc/inetd.conf.local
