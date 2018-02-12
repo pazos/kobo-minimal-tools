@@ -12,6 +12,6 @@ for icon in "${ICONS_DIR}"/*.png; do
     script="${SCRIPTS_DIR}/${app}/${app}.sh"
     logfile="/tmp/fmon-${app}.log"
     
-    echo "[fmon]:registering new trigger: ${icon}, linked with ${script}" >> $logfile"
+    echo "[fmon]:registering new trigger: ${icon}, linked with ${script}" >> "$logfile"
     /sbin/fmon "$icon" "$script" >> "$logfile" 2>&1 &
 done
